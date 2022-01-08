@@ -2,19 +2,26 @@ package com.example.myapplication;
 
 public class QuestionLibrary {
     private String mQuestions[] = {
-            "what is carrot?",
-            "what is car",
-            "what is red"
+            "what is apple?",
+            "what is orange?",
+            "what is avokado?",
+            "what is cherry?",
+            "what is pear?",
+            "what is banana?",
     };
+
     private int numOfQuestions = mQuestions.length;
 
     private String mChoices[][] = {
             {"תפוח","גזר","תפוז"},
-            {"מכונית","משאית","אופנוע"},
-            {"אדום","ירוק","כחול"}
+            {"אפרסק","ענבים","תפוז"},
+            {"קלמנטינה","אגס","אבוקדו"},
+            {"מלון","דובדבן","אננס"},
+            {"אגס","תפוז","תות"},
+            {"ענבים","אפרסק","בננה"},
     };
 
-    private final String[] mCorrectAnswers = {"גזר","מכונית","אדום"};
+    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה"};
 
     public int getNumOfQuestions(){
         return numOfQuestions;

@@ -1,11 +1,17 @@
 package com.example.myapplication;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonChoice1;
     private Button mButtonChoice2;
     private Button mButtonChoice3;
-    private  Button mButtonExit;
 
     private String mAnswer;
     private int mScore = 0;
@@ -27,12 +32,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent switchActivityIntent = new Intent(MainActivity.this,matching_game.class);
+        Dictionary items = new Hashtable();
+        items.put("res/drawable/apple.png", 0);
+        items.put("res/drawable/orange.png", 1);
+        items.put("res/drawable/avokado.png", 2);
+        items.put("res/drawable/cherry.png", 3);
+        items.put("res/drawable/pear.png", 4);
+        items.put("res/drawable/banana.png", 5);
+        String NameOfImage = getIntent().getStringExtra("NAME_OF_IMAGE");
+        mScore = getIntent().getIntExtra("SCORE",0);
+        mQuestionNumber = (int) items.get(NameOfImage);
+        Toast.makeText(MainActivity.this, NameOfImage, Toast.LENGTH_LONG).show();
         mScoreView = findViewById(R.id.score);
         mQuestionView = findViewById(R.id.question);
         mButtonChoice1 = findViewById(R.id.choice1);
         mButtonChoice2 = findViewById(R.id.choice2);
         mButtonChoice3 = findViewById(R.id.choice3);
-        mButtonExit = findViewById(R.id.exitBtn);
+
 
         updateQuestion();
 
@@ -42,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice1.getText() == mAnswer){
                     mScore = mScore + 1;
                     updateScore(mScore);
-                    updateQuestion();
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
                 }
+                switchActivityIntent.putExtra("SCORE", mScore);
+                finish();
             }
         });
 
@@ -57,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice2.getText() == mAnswer){
                     mScore = mScore + 1;
                     updateScore(mScore);
-                    updateQuestion();
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
                 }
+                switchActivityIntent.putExtra("SCORE", mScore);
+                finish();
             }
         });
 
@@ -72,18 +89,11 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice3.getText() == mAnswer){
                     mScore = mScore + 1;
                     updateScore(mScore);
-                    updateQuestion();
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
                 }
-            }
-        });
-
-        mButtonExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                switchActivityIntent.putExtra("SCORE", mScore);
                 finish();
             }
         });
@@ -97,8 +107,13 @@ public class MainActivity extends AppCompatActivity {
             mButtonChoice2.setText(mQuestionLibarary.getChoice2(mQuestionNumber));
             mButtonChoice3.setText(mQuestionLibarary.getChoice3(mQuestionNumber));
 
+
             mAnswer = mQuestionLibarary.getCorrectAnswer(mQuestionNumber);
             mQuestionNumber++;
+        }
+        else{
+            Intent switchActivityIntent = new Intent(MainActivity.this, MainScreenApp.class);
+            startActivity(switchActivityIntent);
         }
     }
 

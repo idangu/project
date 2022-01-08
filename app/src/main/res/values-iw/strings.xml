@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="titleOfMultipleChoice">בחירה מרובה</string>
+    <string name="next">הבא</string>
+    <string name="previous">הקודם</string>
+    <string name="hello_first_fragment">שלום</string>
+    <string name="hello_second_fragment">שלום</string>
+    <string name="second_fragment_label">מסך</string>
+    <string name="first_fragment_label">מסך</string>
+    <string name="title_activity_main_screen">מסך</string>
+    <string name="score">ניקוד</string>
+    <string name="exit">יציאה</string>
+    <string name="memoryGameTitle">משחק הזיכרון</string>
+</resources>

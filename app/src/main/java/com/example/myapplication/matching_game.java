@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,18 +9,21 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 
 public class matching_game extends AppCompatActivity {
     Button button1;
     private int objectLength = 12;
+    private int mScore = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_game);
-
         List<Integer> list = new ArrayList<Integer>();
         Button[] buttons = new Button[objectLength];
         buttons[0] = (Button)findViewById(R.id.btn1);
@@ -52,6 +56,7 @@ public class matching_game extends AppCompatActivity {
         final boolean[] turnOver = {false};
         final int[] lastClicked = {-1};
 
+
         for (int i=0;i<12;i++){
             buttons[i].setText("cardBack");
             buttons[i].setTextSize(0.0F);
@@ -59,6 +64,8 @@ public class matching_game extends AppCompatActivity {
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    mScore = getIntent().getIntExtra("SCORE",0);
+                    Toast.makeText(matching_game.this, "Score is " +  mScore, Toast.LENGTH_SHORT).show();
                     if(buttons[finalI].getText() == "cardBack" && !turnOver[0]){
                         buttons[finalI].setBackgroundResource(list.get(finalI));
                         buttons[finalI].setText(list.get(finalI));
@@ -74,6 +81,10 @@ public class matching_game extends AppCompatActivity {
                     if (clicked[0] == 2){
                         turnOver[0] = true;
                         if(buttons[finalI].getText() == buttons[lastClicked[0]].getText()) {
+                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+                            switchActivityIntent.putExtra("SCORE", mScore);
+                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
+                            startActivity(switchActivityIntent);
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);
@@ -89,5 +100,10 @@ public class matching_game extends AppCompatActivity {
 
 
         }
+
     }
+
+
+
+
 }

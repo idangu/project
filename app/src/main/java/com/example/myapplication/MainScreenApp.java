@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 
 public class MainScreenApp extends AppCompatActivity {
 
-    Button moveToMemoryGame;
+    Button moveToMemoryGame,completeSentences;
 
 
     @Override
@@ -21,24 +21,33 @@ public class MainScreenApp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen_app);
         moveToMemoryGame = findViewById(R.id.MoveToMemoryActivity);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(moveToMemoryGame, "scaleX",2).setDuration(2000);
-        ObjectAnimator animator2 = ObjectAnimator.ofFloat(moveToMemoryGame, "scaleY",2).setDuration(2000);
+        completeSentences = findViewById(R.id.completeSentences);
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(moveToMemoryGame, "scaleX", 1.3F).setDuration(2000);
+        ObjectAnimator animator2 = ObjectAnimator.ofFloat(moveToMemoryGame, "scaleY",1.3F).setDuration(2000);
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(completeSentences, "scaleX",1.3F).setDuration(2000);
+        ObjectAnimator animator4 = ObjectAnimator.ofFloat(completeSentences, "scaleY",1.3F).setDuration(2000);
         AnimatorSet set1 = new AnimatorSet();
-        set1.playTogether(animator,animator2);
+        set1.playTogether(animator,animator2,animator3,animator4);
         set1.start();
+
+
+        completeSentences.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent switchActivityIntent = new Intent(MainScreenApp.this, MainActivity.class);
+                startActivity(switchActivityIntent);
+            }
+        });
 
 
 
         moveToMemoryGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchActivities();
+                Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                startActivity(switchActivityIntent);
             }
         });
-    }
-
-    private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, matching_game.class);
-        startActivity(switchActivityIntent);
     }
 }
