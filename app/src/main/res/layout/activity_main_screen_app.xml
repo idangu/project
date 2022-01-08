@@ -17,22 +17,37 @@
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_gravity="center"
-     android:layout_marginVertical="20dp"
+     android:layout_marginTop="20dp"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
      android:text="@string/memoryGameTitle"
      android:textColor="@color/white"
      android:textSize="30sp" />
 
+
  <Button
+     android:visibility="gone"
      android:layout_marginTop="20dp"
-     android:id="@+id/completeSentences"
+     android:id="@+id/easyLevel"
      android:layout_width="wrap_content"
      android:layout_gravity="center"
      android:layout_height="wrap_content"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
-     android:text="@string/titleOfMultipleChoice"
+     android:text="@string/easyLevel"
+     android:textColor="@color/white"
+     android:textSize="30sp" />
+
+ <Button
+     android:visibility="gone"
+     android:layout_marginTop="20dp"
+     android:id="@+id/mediumLevel"
+     android:layout_width="wrap_content"
+     android:layout_gravity="center"
+     android:layout_height="wrap_content"
+     android:backgroundTint="@color/design_default_color_primary"
+     android:fontFamily="@font/secular_one"
+     android:text="@string/mediumLevel"
      android:textColor="@color/white"
      android:textSize="30sp" />
 

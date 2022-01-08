@@ -8,6 +8,12 @@ public class QuestionLibrary {
             "what is cherry?",
             "what is pear?",
             "what is banana?",
+            "what is doga?",
+            "what is dogb?",
+            "what is dogc?",
+            "what is dogd?",
+            "what is doge?",
+            "what is dogf?",
     };
 
     private int numOfQuestions = mQuestions.length;
@@ -19,9 +25,15 @@ public class QuestionLibrary {
             {"מלון","דובדבן","אננס"},
             {"אגס","תפוז","תות"},
             {"ענבים","אפרסק","בננה"},
+            {"אריה","חתול","כלב"},
+            {"אריה","חתול","כלב"},
+            {"אריה","חתול","כלב"},
+            {"אריה","חתול","כלב"},
+            {"אריה","חתול","כלב"},
+            {"אריה","חתול","כלב"},
     };
 
-    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה"};
+    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה","כלב","כלב","כלב","כלב","כלב","כלב"};
 
     public int getNumOfQuestions(){
         return numOfQuestions;

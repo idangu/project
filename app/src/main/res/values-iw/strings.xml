@@ -12,4 +12,6 @@
     <string name="score">ניקוד</string>
     <string name="exit">יציאה</string>
     <string name="memoryGameTitle">משחק הזיכרון</string>
+    <string name="easyLevel">רמה קלה</string>
+    <string name="mediumLevel">רמה בינונית</string>
 </resources>

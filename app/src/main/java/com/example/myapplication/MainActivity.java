@@ -40,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
         items.put("res/drawable/cherry.png", 3);
         items.put("res/drawable/pear.png", 4);
         items.put("res/drawable/banana.png", 5);
+        items.put("res/drawable/dog.png", 6);
+        items.put("res/drawable/cat.png", 7);
+        items.put("res/drawable/fish.png", 8);
+        items.put("res/drawable/cow.png", 9);
+        items.put("res/drawable/pig.png", 10);
+        items.put("res/drawable/bumblebee.png", 11);
         String NameOfImage = getIntent().getStringExtra("NAME_OF_IMAGE");
         mScore = getIntent().getIntExtra("SCORE",0);
         mQuestionNumber = (int) items.get(NameOfImage);
-        Toast.makeText(MainActivity.this, NameOfImage, Toast.LENGTH_LONG).show();
         mScoreView = findViewById(R.id.score);
         mQuestionView = findViewById(R.id.question);
         mButtonChoice1 = findViewById(R.id.choice1);

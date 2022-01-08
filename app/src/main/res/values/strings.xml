@@ -13,4 +13,6 @@
     <string name="score">Score</string>
     <string name="exit">exit</string>
     <string name="memoryGameTitle">Memory Game</string>
+    <string name="easyLevel">easy level</string>
+    <string name="mediumLevel">medium level</string>
 </resources>

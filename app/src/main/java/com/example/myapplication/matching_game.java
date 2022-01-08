@@ -38,18 +38,40 @@ public class matching_game extends AppCompatActivity {
         buttons[9] = (Button)findViewById(R.id.btn10);
         buttons[10] = (Button)findViewById(R.id.btn11);
         buttons[11] = (Button)findViewById(R.id.btn12);
-        list.add(R.drawable.apple);
-        list.add(R.drawable.orange);
-        list.add(R.drawable.avokado);
-        list.add(R.drawable.banana);
-        list.add(R.drawable.cherry);
-        list.add(R.drawable.apple);
-        list.add(R.drawable.orange);
-        list.add(R.drawable.avokado);
-        list.add(R.drawable.banana);
-        list.add(R.drawable.cherry);
-        list.add(R.drawable.pear);
-        list.add(R.drawable.pear);
+        String level;
+
+        level = getIntent().getStringExtra("LEVEL");
+
+        if (level.equals("easy")){
+            list.add(R.drawable.apple);
+            list.add(R.drawable.orange);
+            list.add(R.drawable.avokado);
+            list.add(R.drawable.banana);
+            list.add(R.drawable.cherry);
+            list.add(R.drawable.apple);
+            list.add(R.drawable.orange);
+            list.add(R.drawable.avokado);
+            list.add(R.drawable.banana);
+            list.add(R.drawable.cherry);
+            list.add(R.drawable.pear);
+            list.add(R.drawable.pear);
+        }else if(level.equals("medium")){
+            list.add(R.drawable.dog);
+            list.add(R.drawable.pig);
+            list.add(R.drawable.cow);
+            list.add(R.drawable.bumblebee);
+            list.add(R.drawable.cat);
+            list.add(R.drawable.fish);
+            list.add(R.drawable.dog);
+            list.add(R.drawable.pig);
+            list.add(R.drawable.cow);
+            list.add(R.drawable.bumblebee);
+            list.add(R.drawable.cat);
+            list.add(R.drawable.fish);
+        }
+
+
+
         Collections.shuffle(list);
         button1 = findViewById(R.id.btn1);
         final int[] clicked = {0};
@@ -65,7 +87,6 @@ public class matching_game extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     mScore = getIntent().getIntExtra("SCORE",0);
-                    Toast.makeText(matching_game.this, "Score is " +  mScore, Toast.LENGTH_SHORT).show();
                     if(buttons[finalI].getText() == "cardBack" && !turnOver[0]){
                         buttons[finalI].setBackgroundResource(list.get(finalI));
                         buttons[finalI].setText(list.get(finalI));
@@ -95,10 +116,7 @@ public class matching_game extends AppCompatActivity {
                         turnOver[0] = false;
                     }
                 }
-
             });
-
-
         }
 
     }
