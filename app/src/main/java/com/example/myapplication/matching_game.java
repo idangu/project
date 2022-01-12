@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,18 +14,34 @@ import java.util.Collections;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 
 
 public class matching_game extends AppCompatActivity {
     Button button1;
     private int objectLength = 12;
     private int mScore = 0;
+    TextToSpeech mTTs;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_game);
+        mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    int result = mTTs.setLanguage(Locale.US);
+
+                    if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+                        Log.e("TTS","Language not supported");
+                    }
+                }
+            }
+        });
         List<Integer> list = new ArrayList<Integer>();
         Button[] buttons = new Button[objectLength];
         buttons[0] = (Button)findViewById(R.id.btn1);
@@ -68,6 +86,19 @@ public class matching_game extends AppCompatActivity {
             list.add(R.drawable.bumblebee);
             list.add(R.drawable.cat);
             list.add(R.drawable.fish);
+        }else{
+            list.add(R.drawable.police);
+            list.add(R.drawable.nurse);
+            list.add(R.drawable.service);
+            list.add(R.drawable.cook);
+            list.add(R.drawable.student);
+            list.add(R.drawable.nanny);
+            list.add(R.drawable.police);
+            list.add(R.drawable.nurse);
+            list.add(R.drawable.service);
+            list.add(R.drawable.cook);
+            list.add(R.drawable.student);
+            list.add(R.drawable.nanny);
         }
 
 
@@ -102,6 +133,10 @@ public class matching_game extends AppCompatActivity {
                     if (clicked[0] == 2){
                         turnOver[0] = true;
                         if(buttons[finalI].getText() == buttons[lastClicked[0]].getText()) {
+                            String toSpeak = (String) buttons[finalI].getText();
+                            toSpeak = toSpeak.substring(13,toSpeak.length()-4);
+                            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                            mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                             Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
                             switchActivityIntent.putExtra("SCORE", mScore);
                             switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
@@ -121,7 +156,13 @@ public class matching_game extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        if(mTTs !=null){
+            mTTs.stop();
+            mTTs.shutdown();
+        }
 
-
-
+        super.onDestroy();
+    }
 }

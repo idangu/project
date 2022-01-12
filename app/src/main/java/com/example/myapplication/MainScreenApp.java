@@ -10,7 +10,7 @@ import android.widget.Button;
 
 public class MainScreenApp extends AppCompatActivity {
 
-    Button showLevelsBtn,easyLevel,mediumLevel;
+    Button showLevelsBtn,easyLevel,mediumLevel,hardLevel;
 
 
     @Override
@@ -20,6 +20,7 @@ public class MainScreenApp extends AppCompatActivity {
         showLevelsBtn = findViewById(R.id.MoveToMemoryActivity);
         easyLevel = findViewById(R.id.easyLevel);
         mediumLevel = findViewById(R.id.mediumLevel);
+        hardLevel = findViewById(R.id.hardLevel);
 
 
 
@@ -47,6 +48,17 @@ public class MainScreenApp extends AppCompatActivity {
             }
         });
 
+        hardLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                switchActivityIntent.putExtra("LEVEL", "hard");
+                startActivity(switchActivityIntent);
+            }
+        });
+
+
+
 
 
 
@@ -56,6 +68,7 @@ public class MainScreenApp extends AppCompatActivity {
                 showLevelsBtn.setVisibility(View.GONE);
                 easyLevel.setVisibility(View.VISIBLE);
                 mediumLevel.setVisibility(View.VISIBLE);
+                hardLevel.setVisibility(View.VISIBLE);
             }
         });
     }

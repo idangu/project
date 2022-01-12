@@ -14,6 +14,12 @@ public class QuestionLibrary {
             "what is dogd?",
             "what is doge?",
             "what is dogf?",
+            "what is proa?",
+            "what is prob?",
+            "what is proc?",
+            "what is prod?",
+            "what is proe?",
+            "what is prof?",
     };
 
     private int numOfQuestions = mQuestions.length;
@@ -31,9 +37,15 @@ public class QuestionLibrary {
             {"אריה","חתול","כלב"},
             {"אריה","חתול","כלב"},
             {"אריה","חתול","כלב"},
+            {"אריה","חתול","נמר"},
+            {"אריה","חתול","נמר"},
+            {"אריה","חתול","נמר"},
+            {"אריה","חתול","נמר"},
+            {"אריה","חתול","נמר"},
+            {"אריה","חתול","נמר"},
     };
 
-    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה","כלב","כלב","כלב","כלב","כלב","כלב"};
+    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה","כלב","כלב","כלב","כלב","כלב","כלב","נמר","נמר","נמר","נמר","נמר","נמר"};
 
     public int getNumOfQuestions(){
         return numOfQuestions;

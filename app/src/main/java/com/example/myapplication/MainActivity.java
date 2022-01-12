@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         items.put("res/drawable/cow.png", 9);
         items.put("res/drawable/pig.png", 10);
         items.put("res/drawable/bumblebee.png", 11);
+        items.put("res/drawable/cook.png", 12);
+        items.put("res/drawable/nanny.png", 13);
+        items.put("res/drawable/nurse.png", 14);
+        items.put("res/drawable/police.png", 15);
+        items.put("res/drawable/service.png", 16);
+        items.put("res/drawable/student.png", 17);
         String NameOfImage = getIntent().getStringExtra("NAME_OF_IMAGE");
         mScore = getIntent().getIntExtra("SCORE",0);
         mQuestionNumber = (int) items.get(NameOfImage);

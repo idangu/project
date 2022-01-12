@@ -15,4 +15,5 @@
     <string name="memoryGameTitle">Memory Game</string>
     <string name="easyLevel">easy level</string>
     <string name="mediumLevel">medium level</string>
+    <string name="hardLevel">hard level</string>
 </resources>
