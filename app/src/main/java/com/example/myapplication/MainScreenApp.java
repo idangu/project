@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,16 +12,29 @@ import android.widget.Button;
 public class MainScreenApp extends AppCompatActivity {
 
     Button showLevelsBtn,easyLevel,mediumLevel,hardLevel;
+    MediaPlayer soundClick;
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent(MainScreenApp.this, BackgroundSoundService.class);
+        startService(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent myService = new Intent(MainScreenApp.this, BackgroundSoundService.class);
         setContentView(R.layout.activity_main_screen_app);
+        startService(myService);
+        soundClick = MediaPlayer.create(getApplicationContext(), R.raw.menu_click);
         showLevelsBtn = findViewById(R.id.MoveToMemoryActivity);
         easyLevel = findViewById(R.id.easyLevel);
         mediumLevel = findViewById(R.id.mediumLevel);
         hardLevel = findViewById(R.id.hardLevel);
+
+
 
 
 
@@ -33,15 +47,19 @@ public class MainScreenApp extends AppCompatActivity {
         easyLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundClick.start();
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "easy");
                 startActivity(switchActivityIntent);
+                stopService(myService);
             }
         });
 
         mediumLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                soundClick.start();
+                stopService(myService);
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "medium");
                 startActivity(switchActivityIntent);
@@ -51,6 +69,8 @@ public class MainScreenApp extends AppCompatActivity {
         hardLevel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundClick.start();
+                stopService(myService);
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "hard");
                 startActivity(switchActivityIntent);
@@ -65,6 +85,7 @@ public class MainScreenApp extends AppCompatActivity {
         showLevelsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                soundClick.start();
                 showLevelsBtn.setVisibility(View.GONE);
                 easyLevel.setVisibility(View.VISIBLE);
                 mediumLevel.setVisibility(View.VISIBLE);

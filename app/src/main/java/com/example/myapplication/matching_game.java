@@ -1,11 +1,20 @@
 package com.example.myapplication;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -22,14 +31,23 @@ public class matching_game extends AppCompatActivity {
     private int objectLength = 12;
     private int mScore = 0;
     TextToSpeech mTTs;
+    MediaPlayer sound;
 
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sound.stop();
+        sound.release();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_game);
+        sound = MediaPlayer.create(getApplicationContext(), R.raw.duck);
+        sound.start();
+        sound.setLooping(true);
         mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -117,10 +135,22 @@ public class matching_game extends AppCompatActivity {
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mScore = getIntent().getIntExtra("SCORE",0);
                     if(buttons[finalI].getText() == "cardBack" && !turnOver[0]){
-                        buttons[finalI].setBackgroundResource(list.get(finalI));
+                        final ObjectAnimator oa1 = ObjectAnimator.ofFloat(buttons[finalI], "scaleX", 1f, 0f);
+                        final ObjectAnimator oa2 = ObjectAnimator.ofFloat(buttons[finalI], "scaleX", 0f, 1f);
+                        oa1.setInterpolator(new DecelerateInterpolator());
+                        oa2.setInterpolator(new AccelerateDecelerateInterpolator());
+                        oa1.addListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                buttons[finalI].setBackgroundResource(list.get(finalI));
+                                oa2.start();
+                            }
+                        });
+                        oa1.start();
                         buttons[finalI].setText(list.get(finalI));
+                        buttons[finalI].setClickable(false);
                         if(clicked[0] == 0){
                             lastClicked[0] = finalI;
                         }
@@ -137,15 +167,66 @@ public class matching_game extends AppCompatActivity {
                             toSpeak = toSpeak.substring(13,toSpeak.length()-4);
                             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                             mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
-                            switchActivityIntent.putExtra("SCORE", mScore);
-                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
-                            startActivity(switchActivityIntent);
+                            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+                                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
+                                            startActivity(switchActivityIntent);
+                                        }
+                                    },
+                                    1000);
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);
                             turnOver[0] = false;
                             clicked[0] = 0;
+                        }
+                        else{
+                            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            Handler handler = new Handler(Looper.getMainLooper());
+                            Runnable runnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    final ObjectAnimator oa1 = ObjectAnimator.ofFloat(buttons[finalI], "scaleX", 1f, 0f);
+                                    final ObjectAnimator oa2 = ObjectAnimator.ofFloat(buttons[finalI], "scaleX", 0f, 1f);
+                                    final ObjectAnimator oa3 = ObjectAnimator.ofFloat(buttons[lastClicked[0]], "scaleX", 1f, 0f);
+                                    final ObjectAnimator oa4 = ObjectAnimator.ofFloat(buttons[lastClicked[0]], "scaleX", 0f, 1f);
+                                    oa1.setInterpolator(new DecelerateInterpolator());
+                                    oa2.setInterpolator(new AccelerateDecelerateInterpolator());
+                                    oa3.setInterpolator(new DecelerateInterpolator());
+                                    oa4.setInterpolator(new AccelerateDecelerateInterpolator());
+                                    oa3.addListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            buttons[finalI].setBackgroundResource(R.drawable.card);
+                                            oa4.start();
+                                        }
+                                    });
+                                    oa1.addListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            super.onAnimationEnd(animation);
+                                            buttons[finalI].setBackgroundResource(R.drawable.card);
+                                            oa2.start();
+                                        }
+                                    });
+                                    oa1.start();
+                                    oa3.start();
+                                    buttons[finalI].setText("cardBack");
+                                    clicked[0]--;
+                                    clicked[0]--;
+                                    buttons[lastClicked[0]].setBackgroundResource(R.drawable.card);
+                                    buttons[lastClicked[0]].setText("cardBack");
+                                    turnOver[0] = false;
+                                    buttons[finalI].setClickable(true);
+                                    buttons[lastClicked[0]].setClickable(true);
+                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                }
+                            };
+                            handler.postDelayed(runnable, 1000);
                         }
                     } else if (clicked[0] == 0){
                         turnOver[0] = false;
