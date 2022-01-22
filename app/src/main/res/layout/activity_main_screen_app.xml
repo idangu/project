@@ -5,12 +5,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:id="@+id/main_layout"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical">
 
  <ImageView
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:src="@drawable/logo"/>
+     android:layout_gravity="center"
+     android:src="@drawable/logo_english"/>
 
  <Button
      android:id="@+id/MoveToMemoryActivity"
@@ -21,6 +23,7 @@
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
      android:text="@string/memoryGameTitle"
+     android:background="@drawable/rectangle"
      android:textColor="@color/white"
      android:textSize="30sp" />
 
@@ -32,6 +35,7 @@
      android:layout_width="wrap_content"
      android:layout_gravity="center"
      android:layout_height="wrap_content"
+     android:background="@drawable/rectangle"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
      android:text="@string/easyLevel"
@@ -42,6 +46,7 @@
      android:visibility="gone"
      android:layout_marginTop="20dp"
      android:id="@+id/mediumLevel"
+     android:background="@drawable/rectangle"
      android:layout_width="wrap_content"
      android:layout_gravity="center"
      android:layout_height="wrap_content"
@@ -56,6 +61,7 @@
      android:layout_marginTop="20dp"
      android:id="@+id/hardLevel"
      android:layout_width="wrap_content"
+     android:background="@drawable/rectangle"
      android:layout_gravity="center"
      android:layout_height="wrap_content"
      android:backgroundTint="@color/design_default_color_primary"

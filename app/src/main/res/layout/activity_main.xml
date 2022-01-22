@@ -34,7 +34,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textSize="28sp"
-
             android:text="0" />
 
     </RelativeLayout>
@@ -86,7 +85,6 @@
         android:text="ענבים"
         android:textColor="@color/white"
         android:backgroundTint="@color/gray"
-
         android:textSize="22sp" />
 
 </LinearLayout>

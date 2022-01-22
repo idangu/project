@@ -3,11 +3,13 @@ package com.example.myapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,12 +36,12 @@ public class matching_game extends AppCompatActivity {
     MediaPlayer sound;
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        sound.stop();
-        sound.release();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        sound.stop();
+//        sound.release();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,15 +169,26 @@ public class matching_game extends AppCompatActivity {
                             toSpeak = toSpeak.substring(13,toSpeak.length()-4);
                             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                             mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                            new android.os.Handler(Looper.getMainLooper()).postDelayed(
-                                    new Runnable() {
-                                        public void run() {
-                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
-                                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
-                                            startActivity(switchActivityIntent);
-                                        }
-                                    },
-                                    1000);
+//                            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+//                                    new Runnable() {
+//                                        public void run() {
+////                                            AlertDialog.Builder builder = new AlertDialog.Builder(matching_game.this);
+////                                            View dialogView = getLayoutInflater().inflate(R.layout.activity_main, null);
+////                                            builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
+////                                                @Override
+////                                                public void onClick(DialogInterface dialogInterface, int i) {
+////                                                    Toast.makeText(matching_game.this, "aaaa", Toast.LENGTH_SHORT).show();
+////                                                }
+////                                            }).show();
+////                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+////                                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
+////                                            startActivity(switchActivityIntent);
+//                                        }
+//                                    },
+//                                    1000);
+                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
+                            startActivity(switchActivityIntent);
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);

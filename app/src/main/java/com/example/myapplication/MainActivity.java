@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent switchActivityIntent = new Intent(MainActivity.this,matching_game.class);
         Dictionary items = new Hashtable();
         items.put("res/drawable/apple.png", 0);
         items.put("res/drawable/orange.png", 1);
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
-                switchActivityIntent.putExtra("SCORE", mScore);
                 finish();
             }
         });
@@ -89,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
-                switchActivityIntent.putExtra("SCORE", mScore);
                 finish();
             }
         });
@@ -104,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
-                switchActivityIntent.putExtra("SCORE", mScore);
                 finish();
             }
         });
@@ -121,10 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
             mAnswer = mQuestionLibarary.getCorrectAnswer(mQuestionNumber);
             mQuestionNumber++;
-        }
-        else{
-            Intent switchActivityIntent = new Intent(MainActivity.this, MainScreenApp.class);
-            startActivity(switchActivityIntent);
         }
     }
 
