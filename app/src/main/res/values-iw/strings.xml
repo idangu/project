@@ -15,4 +15,5 @@
     <string name="easyLevel">רמה קלה</string>
     <string name="mediumLevel">רמה בינונית</string>
     <string name="hardLevel">רמה קשה</string>
+    <string name="enterName">תכניס את השם שלך:</string>
 </resources>

@@ -12,12 +12,17 @@
             "child views" or "children" of the linear layout -->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Memory"
         android:textAlignment="center"
-        android:textSize="48sp" />
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/scoreGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="40sp"/>
 
     <TableLayout
         android:layout_width="match_parent"

@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,9 +32,11 @@ import java.util.Locale;
 public class matching_game extends AppCompatActivity {
     Button button1;
     private int objectLength = 12;
-    private int mScore = 0;
+    int mScore = 0;
     TextToSpeech mTTs;
     MediaPlayer sound;
+    TextView userName;
+    TextView score;
 
 
 //    @Override
@@ -47,6 +50,10 @@ public class matching_game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching_game);
+        userName = findViewById(R.id.userName);
+        userName.setText(getIntent().getStringExtra("userName"));
+        score = findViewById(R.id.scoreGame);
+        score.setText(Integer.toString(mScore));
         sound = MediaPlayer.create(getApplicationContext(), R.raw.duck);
         sound.start();
         sound.setLooping(true);
@@ -165,35 +172,41 @@ public class matching_game extends AppCompatActivity {
                     if (clicked[0] == 2){
                         turnOver[0] = true;
                         if(buttons[finalI].getText() == buttons[lastClicked[0]].getText()) {
+                            mScore+=5;
+                            score.setText(Integer.toString(mScore));
                             String toSpeak = (String) buttons[finalI].getText();
                             toSpeak = toSpeak.substring(13,toSpeak.length()-4);
                             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                             mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-//                            new android.os.Handler(Looper.getMainLooper()).postDelayed(
-//                                    new Runnable() {
-//                                        public void run() {
-////                                            AlertDialog.Builder builder = new AlertDialog.Builder(matching_game.this);
-////                                            View dialogView = getLayoutInflater().inflate(R.layout.activity_main, null);
-////                                            builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
-////                                                @Override
-////                                                public void onClick(DialogInterface dialogInterface, int i) {
-////                                                    Toast.makeText(matching_game.this, "aaaa", Toast.LENGTH_SHORT).show();
-////                                                }
-////                                            }).show();
-////                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
-////                                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
-////                                            startActivity(switchActivityIntent);
-//                                        }
-//                                    },
-//                                    1000);
-                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
-                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
-                            startActivity(switchActivityIntent);
+                            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+//                                            AlertDialog.Builder builder = new AlertDialog.Builder(matching_game.this);
+//                                            View dialogView = getLayoutInflater().inflate(R.layout.activity_main, null);
+//                                            builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                                    Toast.makeText(matching_game.this, "aaaa", Toast.LENGTH_SHORT).show();
+//                                                }
+//                                            }).show();
+                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+                                            switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
+                                            switchActivityIntent.putExtra("score", mScore);
+                                            startActivity(switchActivityIntent);
+                                            buttons[finalI].setVisibility(View.INVISIBLE);
+                                            buttons[lastClicked[0]].setVisibility(View.INVISIBLE);
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                        }
+                                    },
+                                    1000);
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);
                             turnOver[0] = false;
                             clicked[0] = 0;
+
                         }
                         else{
                             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -252,11 +265,8 @@ public class matching_game extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if(mTTs !=null){
-            mTTs.stop();
-            mTTs.shutdown();
-        }
-
         super.onDestroy();
+        mTTs.stop();
+        mTTs.shutdown();
     }
 }

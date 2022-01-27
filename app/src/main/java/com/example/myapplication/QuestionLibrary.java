@@ -2,50 +2,50 @@ package com.example.myapplication;
 
 public class QuestionLibrary {
     private String mQuestions[] = {
-            "what is apple?",
-            "what is orange?",
-            "what is avokado?",
-            "what is cherry?",
-            "what is pear?",
-            "what is banana?",
-            "what is doga?",
-            "what is dogb?",
-            "what is dogc?",
-            "what is dogd?",
-            "what is doge?",
-            "what is dogf?",
-            "what is proa?",
+            "What country is the largest producer of apples?",
+            "Which vitamin makes the orange juice excellent?",
+            "Where does the word avocado come from?",
+            "Sweet cherries which are raw have about 82%?",
+            "What is a pear?",
+            "Bananas are mostly picked when they are:",
+            "Which animal family do dogs belong to?",
+            "Can a cat see in total darkness?",
+            "Sharks are commonly found in seas at what depth?",
+            "How much water does a cow drink daily?",
+            "What are baby pigs known as?",
+            "In which season do bumblebees mate?",
+            "Which Italian city is famous for its pizza and spaghetti?",
             "what is prob?",
-            "what is proc?",
+            "How do puzzles help you?",
             "what is prod?",
-            "what is proe?",
+            "When was the transistor invented?",
             "what is prof?",
     };
 
     private int numOfQuestions = mQuestions.length;
 
     private String mChoices[][] = {
-            {"תפוח","גזר","תפוז"},
-            {"אפרסק","ענבים","תפוז"},
-            {"קלמנטינה","אגס","אבוקדו"},
-            {"מלון","דובדבן","אננס"},
-            {"אגס","תפוז","תות"},
-            {"ענבים","אפרסק","בננה"},
-            {"אריה","חתול","כלב"},
-            {"אריה","חתול","כלב"},
-            {"אריה","חתול","כלב"},
-            {"אריה","חתול","כלב"},
-            {"אריה","חתול","כלב"},
-            {"אריה","חתול","כלב"},
+            {"The USA","China","New Zealand"},
+            {"Vitamin A","Vitamin C","Vitamin B"},
+            {"Farsi","Greek","Spanish"},
+            {"Water","Sugar","Protein"},
+            {"A veggie","A fruit","A flower"},
+            {"Green","Brown","Yellow"},
+            {"Wolves","Lions","Coyotes"},
+            {"Yes","No","Maybe"},
+            {"2000 metres","4000 metres","3000 metres"},
+            {"8 gallons","3 gallons","About a bathtub full"},
+            {"Piglets","Wild boar","Babirusa"},
+            {"Winter","Spring","Autumn"},
+            {"Naples","Venice","Rome"},
             {"אריה","חתול","נמר"},
+            {"They help you learn numbers","They help exercise the brain","They are a time pass"},
             {"אריה","חתול","נמר"},
-            {"אריה","חתול","נמר"},
-            {"אריה","חתול","נמר"},
-            {"אריה","חתול","נמר"},
+            {"1946","1974","1947"},
             {"אריה","חתול","נמר"},
     };
 
-    private final String[] mCorrectAnswers = {"תפוח","תפוז","אבוקדו","דובדבן","אגס","בננה","כלב","כלב","כלב","כלב","כלב","כלב","נמר","נמר","נמר","נמר","נמר","נמר"};
+    private final String[] mCorrectAnswers = {"China","Vitamin C","Spanish","Water","A fruit","Green","Wolves","No","2000 metres","About a bathtub full","Piglets","Autumn","Naples","נמר","They help exercise the brain","נמר","1947","נמר"};
 
     public int getNumOfQuestions(){
         return numOfQuestions;

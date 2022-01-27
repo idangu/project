@@ -16,4 +16,5 @@
     <string name="easyLevel">easy level</string>
     <string name="mediumLevel">medium level</string>
     <string name="hardLevel">hard level</string>
+    <string name="enterName">Please Enter Your Name:</string>
 </resources>

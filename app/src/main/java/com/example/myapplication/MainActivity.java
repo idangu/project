@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,9 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Button mButtonChoice1;
     private Button mButtonChoice2;
     private Button mButtonChoice3;
-
     private String mAnswer;
-    private int mScore = 0;
+    private int mScore;
     private int mQuestionNumber = 0;
 
 
@@ -52,13 +52,18 @@ public class MainActivity extends AppCompatActivity {
         items.put("res/drawable/service.png", 16);
         items.put("res/drawable/student.png", 17);
         String NameOfImage = getIntent().getStringExtra("NAME_OF_IMAGE");
-        mScore = getIntent().getIntExtra("SCORE",0);
+        mScore = getIntent().getIntExtra("score",0);
         mQuestionNumber = (int) items.get(NameOfImage);
         mScoreView = findViewById(R.id.score);
         mQuestionView = findViewById(R.id.question);
         mButtonChoice1 = findViewById(R.id.choice1);
         mButtonChoice2 = findViewById(R.id.choice2);
         mButtonChoice3 = findViewById(R.id.choice3);
+        mScoreView.setText(Integer.toString(mScore));
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("scoreGame", mScore);
+        setResult(Activity.RESULT_OK, resultIntent);
+
 
 
         updateQuestion();
