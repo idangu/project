@@ -17,4 +17,7 @@
     <string name="mediumLevel">medium level</string>
     <string name="hardLevel">hard level</string>
     <string name="enterName">Please Enter Your Name:</string>
+    <string name="points">you get:</string>
+    <string name="backHome">back to home</string>
+    <string name="scoreTable">move to score table</string>
 </resources>

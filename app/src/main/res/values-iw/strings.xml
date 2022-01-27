@@ -16,4 +16,7 @@
     <string name="mediumLevel">רמה בינונית</string>
     <string name="hardLevel">רמה קשה</string>
     <string name="enterName">תכניס את השם שלך:</string>
+    <string name="points">אתה קיבלת:</string>
+    <string name="backHome">חזרה לעמוד הבית</string>
+    <string name="scoreTable">מעבר לטבלת שיאים</string>
 </resources>

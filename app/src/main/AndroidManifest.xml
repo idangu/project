@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".score"
+            android:exported="false" />
+        <activity
+            android:name=".winner"
+            android:exported="false" />
+        <activity
             android:name=".enterYourName"
             android:exported="false" />
         <activity

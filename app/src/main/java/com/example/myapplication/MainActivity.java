@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private String mAnswer;
     private int mScore;
     private int mQuestionNumber = 0;
-
+    private int counter=0;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +61,9 @@ public class MainActivity extends AppCompatActivity {
         mButtonChoice2 = findViewById(R.id.choice2);
         mButtonChoice3 = findViewById(R.id.choice3);
         mScoreView.setText(Integer.toString(mScore));
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("scoreGame", mScore);
-        setResult(Activity.RESULT_OK, resultIntent);
+        userName = getIntent().getStringExtra("userName");
+
+
 
 
 
@@ -72,26 +73,38 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mButtonChoice1.getText() == mAnswer){
-                    mScore = mScore + 1;
+                    mScore = mScore + 5;
                     updateScore(mScore);
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
+                counter++;
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("scoreGame", mScore);
+                setResult(Activity.RESULT_OK, resultIntent);
+                isWinner();
                 finish();
             }
         });
+
+
 
         mButtonChoice2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mButtonChoice2.getText() == mAnswer){
-                    mScore = mScore + 1;
+                    mScore = mScore + 5;
                     updateScore(mScore);
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
+                counter++;
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("scoreGame", mScore);
+                setResult(Activity.RESULT_OK, resultIntent);
+                isWinner();
                 finish();
             }
         });
@@ -100,12 +113,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mButtonChoice3.getText() == mAnswer){
-                    mScore = mScore + 1;
+                    mScore = mScore + 5;
                     updateScore(mScore);
                     Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
                 }
+                counter++;
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("scoreGame", mScore);
+                setResult(Activity.RESULT_OK, resultIntent);
+                isWinner();
                 finish();
             }
         });
@@ -124,6 +142,16 @@ public class MainActivity extends AppCompatActivity {
             mQuestionNumber++;
         }
     }
+
+    public void isWinner(){
+        boolean winner = getIntent().getBooleanExtra("win", true);
+        if(winner){
+            Intent intent = new Intent(MainActivity.this,winner.class);
+            intent.putExtra("userName", userName.toString());
+            intent.putExtra("score", mScore);
+            startActivity(intent);
+        }
+    };
 
     private void updateScore(int point){
         mScoreView.setText("" + mScore);

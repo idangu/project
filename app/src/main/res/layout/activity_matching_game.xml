@@ -8,21 +8,30 @@
     android:background="@drawable/gradient_background"
     android:orientation="vertical">
 
-    <!-- Include other widget or layout tags here. These are considered
-            "child views" or "children" of the linear layout -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
     <TextView
         android:id="@+id/userName"
-        android:layout_width="match_parent"
+        android:text=""
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
+        android:gravity="start"
         android:textSize="40sp"/>
     <TextView
+        android:text=""
+        android:layout_weight="1"
+        android:gravity="end"
         android:id="@+id/scoreGame"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:textSize="40sp"/>
+
+    </LinearLayout>
 
     <TableLayout
         android:layout_width="match_parent"

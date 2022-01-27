@@ -19,12 +19,25 @@ public class MainScreenApp extends AppCompatActivity {
     Button showLevelsBtn,easyLevel,mediumLevel,hardLevel;
     MediaPlayer soundClick;
     SharedPreferences sp;
+    Intent intent;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopService(intent);
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(MainScreenApp.this, BackgroundSoundService.class);
+        intent = new Intent(MainScreenApp.this, BackgroundSoundService.class);
         startService(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(intent);
     }
 
     @Override
@@ -62,7 +75,7 @@ public class MainScreenApp extends AppCompatActivity {
                                             builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                                    switchActivityIntent.putExtra("userName", name.getText());
+                                                    switchActivityIntent.putExtra("userName", name.getText().toString());
                                                     Toast.makeText(MainScreenApp.this, name.getText(), Toast.LENGTH_SHORT).show();
                                                     startActivity(switchActivityIntent);
                                                     stopService(myService);                                                }
@@ -86,7 +99,7 @@ public class MainScreenApp extends AppCompatActivity {
             public void onClick(View view) {
                 soundClick.start();
                 stopService(myService);
-                Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                Intent switchActivityIntent = new Intent(MainScreenApp.this, score.class);
                 switchActivityIntent.putExtra("LEVEL", "hard");
                 startActivity(switchActivityIntent);
             }

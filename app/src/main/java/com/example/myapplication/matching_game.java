@@ -3,12 +3,14 @@ package com.example.myapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class matching_game extends AppCompatActivity {
     MediaPlayer sound;
     TextView userName;
     TextView score;
+    int counter = 0;
 
 
 //    @Override
@@ -45,6 +48,20 @@ public class matching_game extends AppCompatActivity {
 //        sound.stop();
 //        sound.release();
 //    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (3) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    mScore = data.getIntExtra("scoreGame",0);
+                    score.setText(Integer.toString(mScore));
+                }
+                break;
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +189,8 @@ public class matching_game extends AppCompatActivity {
                     if (clicked[0] == 2){
                         turnOver[0] = true;
                         if(buttons[finalI].getText() == buttons[lastClicked[0]].getText()) {
-                            mScore+=5;
+                            counter+=2;
+                            mScore+=10;
                             score.setText(Integer.toString(mScore));
                             String toSpeak = (String) buttons[finalI].getText();
                             toSpeak = toSpeak.substring(13,toSpeak.length()-4);
@@ -194,19 +212,26 @@ public class matching_game extends AppCompatActivity {
                                             Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
                                             switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
                                             switchActivityIntent.putExtra("score", mScore);
-                                            startActivity(switchActivityIntent);
+                                            switchActivityIntent.putExtra("userName", userName.getText().toString());
+                                            switchActivityIntent.putExtra("win", false);
+                                            if(counter == objectLength){
+                                                switchActivityIntent.putExtra("win", true);
+
+                                            }
+                                            startActivityForResult(switchActivityIntent,3);
                                             buttons[finalI].setVisibility(View.INVISIBLE);
                                             buttons[lastClicked[0]].setVisibility(View.INVISIBLE);
                                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
                                         }
                                     },
                                     1000);
+
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);
                             turnOver[0] = false;
                             clicked[0] = 0;
-
                         }
                         else{
                             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -250,6 +275,10 @@ public class matching_game extends AppCompatActivity {
                                     buttons[finalI].setClickable(true);
                                     buttons[lastClicked[0]].setClickable(true);
                                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                    if(mScore>0){
+                                        mScore--;
+                                        score.setText(Integer.toString(mScore));
+                                    }
                                 }
                             };
                             handler.postDelayed(runnable, 1000);
@@ -268,5 +297,7 @@ public class matching_game extends AppCompatActivity {
         super.onDestroy();
         mTTs.stop();
         mTTs.shutdown();
+        sound.stop();
+        sound.release();
     }
 }
