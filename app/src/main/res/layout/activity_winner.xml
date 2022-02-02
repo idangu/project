@@ -5,7 +5,16 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/gradient_background"
+    >
+
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/happy"/>
+
 
     <TextView
         android:id="@+id/points"
@@ -13,19 +22,30 @@
         android:layout_height="wrap_content"
         android:text="@string/points"
         android:textAlignment="center"
-        android:textSize="32sp" />
+        android:fontFamily="@font/secular_one"
+        android:textSize="35sp" />
     <Button
         android:id="@+id/homeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/backHome"/>
+        android:text="@string/backHome"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:fontFamily="@font/secular_one"
+        android:background="@drawable/rectangle"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
     <Button
         android:id="@+id/scoreButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="@string/scoreTable"/>
+        android:text="@string/scoreTable"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:fontFamily="@font/secular_one"
+        android:background="@drawable/rectangle"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
 
 
 

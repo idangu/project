@@ -20,4 +20,5 @@
     <string name="points">you get:</string>
     <string name="backHome">back to home</string>
     <string name="scoreTable">move to score table</string>
+    <string name="registerName">register</string>
 </resources>

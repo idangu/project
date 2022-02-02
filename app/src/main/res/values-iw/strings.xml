@@ -19,4 +19,5 @@
     <string name="points">אתה קיבלת:</string>
     <string name="backHome">חזרה לעמוד הבית</string>
     <string name="scoreTable">מעבר לטבלת שיאים</string>
+    <string name="registerName">הרשמה</string>
 </resources>

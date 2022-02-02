@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +15,22 @@ public class winner extends AppCompatActivity {
     Button homeBtn;
     SharedPreferences mUserInfo;
     Button scoreBtn;
+    MediaPlayer sound;
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sound.stop();
+        sound.release();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_winner);
+        sound = MediaPlayer.create(getApplicationContext(), R.raw.winning);
+        sound.start();
         mUserInfo = getSharedPreferences("users", MODE_PRIVATE);
         int mScore = getIntent().getIntExtra("score",0);
         String userName = getIntent().getStringExtra("userName");

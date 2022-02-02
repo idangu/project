@@ -149,7 +149,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this,winner.class);
             intent.putExtra("userName", userName.toString());
             intent.putExtra("score", mScore);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
     };
 

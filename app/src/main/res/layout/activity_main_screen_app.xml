@@ -20,9 +20,9 @@
      android:layout_height="wrap_content"
      android:layout_gravity="center"
      android:layout_marginTop="20dp"
+     android:text="@string/memoryGameTitle"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
-     android:text="@string/memoryGameTitle"
      android:background="@drawable/rectangle"
      android:textColor="@color/white"
      android:textSize="30sp" />

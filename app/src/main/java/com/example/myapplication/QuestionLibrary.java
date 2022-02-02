@@ -15,11 +15,11 @@ public class QuestionLibrary {
             "What are baby pigs known as?",
             "In which season do bumblebees mate?",
             "Which Italian city is famous for its pizza and spaghetti?",
-            "what is prob?",
+            "What is the role of a nanny?",
             "How do puzzles help you?",
-            "what is prod?",
+            "What's the police phone number?",
             "When was the transistor invented?",
-            "what is prof?",
+            "How many years has a student been studying?",
     };
 
     private int numOfQuestions = mQuestions.length;
@@ -38,14 +38,14 @@ public class QuestionLibrary {
             {"Piglets","Wild boar","Babirusa"},
             {"Winter","Spring","Autumn"},
             {"Naples","Venice","Rome"},
-            {"אריה","חתול","נמר"},
+            {"clean","driver","Save people"},
             {"They help you learn numbers","They help exercise the brain","They are a time pass"},
-            {"אריה","חתול","נמר"},
+            {"101","100","102"},
             {"1946","1974","1947"},
-            {"אריה","חתול","נמר"},
+            {"1","2","3"},
     };
 
-    private final String[] mCorrectAnswers = {"China","Vitamin C","Spanish","Water","A fruit","Green","Wolves","No","2000 metres","About a bathtub full","Piglets","Autumn","Naples","נמר","They help exercise the brain","נמר","1947","נמר"};
+    private final String[] mCorrectAnswers = {"China","Vitamin C","Spanish","Water","A fruit","Green","Wolves","No","2000 metres","About a bathtub full","Piglets","Autumn","Naples","clean","They help exercise the brain","100","1947","3"};
 
     public int getNumOfQuestions(){
         return numOfQuestions;

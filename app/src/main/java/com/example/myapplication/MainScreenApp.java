@@ -20,6 +20,7 @@ public class MainScreenApp extends AppCompatActivity {
     MediaPlayer soundClick;
     SharedPreferences sp;
     Intent intent;
+    Intent myService;
 
     @Override
     protected void onPause() {
@@ -43,7 +44,7 @@ public class MainScreenApp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent myService = new Intent(MainScreenApp.this, BackgroundSoundService.class);
+        myService = new Intent(MainScreenApp.this, BackgroundSoundService.class);
         setContentView(R.layout.activity_main_screen_app);
         startService(myService);
         sp = getSharedPreferences("details",MODE_PRIVATE);
@@ -52,11 +53,6 @@ public class MainScreenApp extends AppCompatActivity {
         easyLevel = findViewById(R.id.easyLevel);
         mediumLevel = findViewById(R.id.mediumLevel);
         hardLevel = findViewById(R.id.hardLevel);
-
-
-
-
-
         ObjectAnimator animator = ObjectAnimator.ofFloat(showLevelsBtn, "scaleX", 1.3F).setDuration(2000);
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(showLevelsBtn, "scaleY",1.3F).setDuration(2000);
         AnimatorSet set1 = new AnimatorSet();
@@ -69,17 +65,7 @@ public class MainScreenApp extends AppCompatActivity {
                 soundClick.start();
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "easy");
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainScreenApp.this);
-                                            View dialogView = getLayoutInflater().inflate(R.layout.activity_enter_your_name, null);
-                                            EditText name = dialogView.findViewById(R.id.name);
-                                            builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    switchActivityIntent.putExtra("userName", name.getText().toString());
-                                                    Toast.makeText(MainScreenApp.this, name.getText(), Toast.LENGTH_SHORT).show();
-                                                    startActivity(switchActivityIntent);
-                                                    stopService(myService);                                                }
-                                            }).show();
+                openNameDialog(switchActivityIntent);
             }
         });
 
@@ -90,7 +76,7 @@ public class MainScreenApp extends AppCompatActivity {
                 stopService(myService);
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "medium");
-                startActivity(switchActivityIntent);
+                openNameDialog(switchActivityIntent);
             }
         });
 
@@ -99,9 +85,9 @@ public class MainScreenApp extends AppCompatActivity {
             public void onClick(View view) {
                 soundClick.start();
                 stopService(myService);
-                Intent switchActivityIntent = new Intent(MainScreenApp.this, score.class);
+                Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
                 switchActivityIntent.putExtra("LEVEL", "hard");
-                startActivity(switchActivityIntent);
+                openNameDialog(switchActivityIntent);
             }
         });
 
@@ -120,5 +106,20 @@ public class MainScreenApp extends AppCompatActivity {
                 hardLevel.setVisibility(View.VISIBLE);
             }
         });
+    }
+
+    public void openNameDialog(Intent switchActivityIntent){
+        String register = getResources().getString(R.string.registerName);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainScreenApp.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.activity_enter_your_name, null);
+        EditText name = dialogView.findViewById(R.id.name);
+        builder.setView(dialogView).setPositiveButton(register, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switchActivityIntent.putExtra("userName", name.getText().toString());
+                Toast.makeText(MainScreenApp.this, name.getText(), Toast.LENGTH_SHORT).show();
+                startActivity(switchActivityIntent);
+                stopService(myService);                                                }
+        }).show();
     }
 }

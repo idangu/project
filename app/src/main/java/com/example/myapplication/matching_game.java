@@ -40,6 +40,7 @@ public class matching_game extends AppCompatActivity {
     TextView userName;
     TextView score;
     int counter = 0;
+    int delayMills = 0;
 
 
 //    @Override
@@ -105,6 +106,7 @@ public class matching_game extends AppCompatActivity {
         level = getIntent().getStringExtra("LEVEL");
 
         if (level.equals("easy")){
+            delayMills = 1000;
             list.add(R.drawable.apple);
             list.add(R.drawable.orange);
             list.add(R.drawable.avokado);
@@ -118,6 +120,7 @@ public class matching_game extends AppCompatActivity {
             list.add(R.drawable.pear);
             list.add(R.drawable.pear);
         }else if(level.equals("medium")){
+            delayMills = 750;
             list.add(R.drawable.dog);
             list.add(R.drawable.pig);
             list.add(R.drawable.cow);
@@ -131,6 +134,7 @@ public class matching_game extends AppCompatActivity {
             list.add(R.drawable.cat);
             list.add(R.drawable.fish);
         }else{
+            delayMills = 500;
             list.add(R.drawable.police);
             list.add(R.drawable.nurse);
             list.add(R.drawable.service);
@@ -201,14 +205,6 @@ public class matching_game extends AppCompatActivity {
                             new android.os.Handler(Looper.getMainLooper()).postDelayed(
                                     new Runnable() {
                                         public void run() {
-//                                            AlertDialog.Builder builder = new AlertDialog.Builder(matching_game.this);
-//                                            View dialogView = getLayoutInflater().inflate(R.layout.activity_main, null);
-//                                            builder.setView(dialogView).setPositiveButton("Register", new DialogInterface.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                                    Toast.makeText(matching_game.this, "aaaa", Toast.LENGTH_SHORT).show();
-//                                                }
-//                                            }).show();
                                             Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
                                             switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
                                             switchActivityIntent.putExtra("score", mScore);
@@ -225,7 +221,7 @@ public class matching_game extends AppCompatActivity {
 
                                         }
                                     },
-                                    1000);
+                                    delayMills);
 
                             Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
@@ -281,7 +277,7 @@ public class matching_game extends AppCompatActivity {
                                     }
                                 }
                             };
-                            handler.postDelayed(runnable, 1000);
+                            handler.postDelayed(runnable, delayMills);
                         }
                     } else if (clicked[0] == 0){
                         turnOver[0] = false;
