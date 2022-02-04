@@ -10,11 +10,14 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -41,6 +44,7 @@ public class matching_game extends AppCompatActivity {
     TextView score;
     int counter = 0;
     int delayMills = 0;
+    boolean isMute = false;
 
 
 //    @Override
@@ -62,6 +66,31 @@ public class matching_game extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.action_mute){
+            if(!isMute) {
+                item.setIcon(R.drawable.unmute);
+                sound.pause();
+                isMute = true;
+            }else{
+                sound.start();
+                item.setIcon(R.drawable.mute);
+                isMute = false;
+            }
+            return true;
+        }else if(item.getItemId() == R.id.action_home){
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_menu,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
