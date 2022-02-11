@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 public class MainScreenApp extends AppCompatActivity {
 
-    Button showLevelsBtn,easyLevel,mediumLevel,hardLevel;
+    Button showLevelsBtn, scoreBtn, easyLevel,mediumLevel,hardLevel;
     MediaPlayer soundClick;
     SharedPreferences sp;
     Intent intent;
@@ -85,6 +85,7 @@ public class MainScreenApp extends AppCompatActivity {
         sp = getSharedPreferences("details",MODE_PRIVATE);
         soundClick = MediaPlayer.create(getApplicationContext(), R.raw.menu_click);
         showLevelsBtn = findViewById(R.id.MoveToMemoryActivity);
+        scoreBtn = findViewById(R.id.MoveToScoreActivity);
         easyLevel = findViewById(R.id.easyLevel);
         mediumLevel = findViewById(R.id.mediumLevel);
         hardLevel = findViewById(R.id.hardLevel);
@@ -106,10 +107,22 @@ public class MainScreenApp extends AppCompatActivity {
                 oa1.start();
             }
         });
+        scoreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainScreenApp.this, score.class);
+                startActivity(intent);
+            }
+        });
         ObjectAnimator animator = ObjectAnimator.ofFloat(showLevelsBtn, "scaleX", 1.3F).setDuration(2000);
         ObjectAnimator animator2 = ObjectAnimator.ofFloat(showLevelsBtn, "scaleY",1.3F).setDuration(2000);
         AnimatorSet set1 = new AnimatorSet();
         set1.playTogether(animator,animator2);
+        set1.start();
+        ObjectAnimator animator3 = ObjectAnimator.ofFloat(scoreBtn, "scaleX", 1.3F).setDuration(2000);
+        ObjectAnimator animator4 = ObjectAnimator.ofFloat(scoreBtn, "scaleY",1.3F).setDuration(2000);
+        AnimatorSet set2 = new AnimatorSet();
+        set1.playTogether(animator3,animator4);
         set1.start();
 
         easyLevel.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +130,7 @@ public class MainScreenApp extends AppCompatActivity {
             public void onClick(View v) {
                 soundClick.start();
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                switchActivityIntent.putExtra("isMute", !isMute);
                 switchActivityIntent.putExtra("LEVEL", "easy");
                 openNameDialog(switchActivityIntent);
             }
@@ -127,6 +141,7 @@ public class MainScreenApp extends AppCompatActivity {
             public void onClick(View v) {
                 soundClick.start();
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                switchActivityIntent.putExtra("isMute", !isMute);
                 switchActivityIntent.putExtra("LEVEL", "medium");
                 openNameDialog(switchActivityIntent);
             }
@@ -137,6 +152,7 @@ public class MainScreenApp extends AppCompatActivity {
             public void onClick(View view) {
                 soundClick.start();
                 Intent switchActivityIntent = new Intent(MainScreenApp.this, matching_game.class);
+                switchActivityIntent.putExtra("isMute", !isMute);
                 switchActivityIntent.putExtra("LEVEL", "hard");
                 openNameDialog(switchActivityIntent);
             }
@@ -151,6 +167,7 @@ public class MainScreenApp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 soundClick.start();
+                scoreBtn.setVisibility(View.GONE);
                 showLevelsBtn.setVisibility(View.GONE);
                 easyLevel.setVisibility(View.VISIBLE);
                 mediumLevel.setVisibility(View.VISIBLE);
@@ -168,7 +185,6 @@ public class MainScreenApp extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 switchActivityIntent.putExtra("userName", name.getText().toString());
-                Toast.makeText(MainScreenApp.this, name.getText(), Toast.LENGTH_SHORT).show();
                 startActivity(switchActivityIntent);
                 stopService(myService);                                                }
         }).show();

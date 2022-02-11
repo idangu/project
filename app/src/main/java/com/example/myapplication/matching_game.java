@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -41,19 +42,14 @@ public class matching_game extends AppCompatActivity {
     TextToSpeech mTTs;
     MediaPlayer sound;
     TextView userName;
+    MenuItem soundItem;
     TextView score;
     int counter = 0;
     int delayMills = 0;
-    boolean isMute = false;
+    boolean isMute;
 
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        sound.stop();
-//        sound.release();
-//    }
-
+    //put the score update from Questions layot
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,16 +67,7 @@ public class matching_game extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.action_mute){
-            if(!isMute) {
-                item.setIcon(R.drawable.unmute);
-                sound.pause();
-                isMute = true;
-            }else{
-                sound.start();
-                item.setIcon(R.drawable.mute);
-                isMute = false;
-            }
-            return true;
+            manageMusic(item);
         }else if(item.getItemId() == R.id.action_home){
             finish();
         }
@@ -90,6 +77,8 @@ public class matching_game extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_menu,menu);
+        soundItem = menu.findItem(R.id.action_mute);
+        manageMusic(soundItem);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -104,6 +93,9 @@ public class matching_game extends AppCompatActivity {
         sound = MediaPlayer.create(getApplicationContext(), R.raw.duck);
         sound.start();
         sound.setLooping(true);
+
+        // create TextToSpeech for answers
+
         mTTs = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -133,6 +125,12 @@ public class matching_game extends AppCompatActivity {
         String level;
 
         level = getIntent().getStringExtra("LEVEL");
+        isMute = getIntent().getBooleanExtra("isMute",false);
+
+
+
+
+        // check level and put list of Images and delayMills
 
         if (level.equals("easy")){
             delayMills = 1000;
@@ -227,7 +225,6 @@ public class matching_game extends AppCompatActivity {
                             score.setText(Integer.toString(mScore));
                             String toSpeak = (String) buttons[finalI].getText();
                             toSpeak = toSpeak.substring(13,toSpeak.length()-4);
-                            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                             mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -252,7 +249,6 @@ public class matching_game extends AppCompatActivity {
                                     },
                                     delayMills);
 
-                            Toast.makeText(matching_game.this, "Good Job!!", Toast.LENGTH_SHORT).show();
                             buttons[finalI].setClickable(false);
                             buttons[lastClicked[0]].setClickable(false);
                             turnOver[0] = false;
@@ -315,6 +311,18 @@ public class matching_game extends AppCompatActivity {
             });
         }
 
+    }
+    private boolean manageMusic(MenuItem item){
+        if(!isMute) {
+            item.setIcon(R.drawable.unmute);
+            sound.pause();
+            isMute = true;
+        }else{
+            sound.start();
+            item.setIcon(R.drawable.mute);
+            isMute = false;
+        }
+        return true;
     }
 
     @Override
