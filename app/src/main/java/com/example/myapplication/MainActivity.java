@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice1.getText() == mAnswer){
                     mScore = mScore + 5;
                     updateScore(mScore);
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,getResources().getString(R.string.correctTxt) , Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongTxt), Toast.LENGTH_SHORT).show();
                 }
                 counter++;
                 Intent resultIntent = new Intent();
@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice2.getText() == mAnswer){
                     mScore = mScore + 5;
                     updateScore(mScore);
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.correctTxt), Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongTxt), Toast.LENGTH_SHORT).show();
                 }
                 counter++;
                 Intent resultIntent = new Intent();
@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
                 if(mButtonChoice3.getText() == mAnswer){
                     mScore = mScore + 5;
                     updateScore(mScore);
-                    Toast.makeText(MainActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.correctTxt), Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(MainActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.wrongTxt), Toast.LENGTH_SHORT).show();
                 }
                 counter++;
                 Intent resultIntent = new Intent();

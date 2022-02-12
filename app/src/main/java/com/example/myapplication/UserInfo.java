@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-public class UserInfo {
+public class UserInfo implements Comparable<UserInfo> {
 
     private String mName;
     private int mScore;
@@ -8,7 +8,7 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "Name : " + mName +" Score: " + mScore;
+        return App.getContext().getResources().getString(R.string.name) + mName + " " + App.getContext().getResources().getString(R.string.scoreTitle) + mScore;
     }
 
     public UserInfo(String mName, int mScore) {
@@ -30,5 +30,10 @@ public class UserInfo {
 
     public void setmScore(int mScore) {
         this.mScore = mScore;
+    }
+
+    @Override
+    public int compareTo(UserInfo userInfo) {
+        return Integer.compare(userInfo.mScore, this.mScore);
     }
 }

@@ -1,51 +1,60 @@
 package com.example.myapplication;
 
+import static android.provider.Settings.System.getString;
+
+import android.content.Context;
+import android.content.res.Resources;
+
 public class QuestionLibrary {
     private String mQuestions[] = {
-            "What country is the largest producer of apples?",
-            "Which vitamin makes the orange juice excellent?",
-            "Where does the word avocado come from?",
-            "Sweet cherries which are raw have about 82%?",
-            "What is a pear?",
-            "Bananas are mostly picked when they are:",
-            "Which animal family do dogs belong to?",
-            "Can a cat see in total darkness?",
-            "Sharks are commonly found in seas at what depth?",
-            "How much water does a cow drink daily?",
-            "What are baby pigs known as?",
-            "In which season do bumblebees mate?",
-            "Which Italian city is famous for its pizza and spaghetti?",
-            "What is the role of a nanny?",
-            "How do puzzles help you?",
-            "What's the police phone number?",
-            "When was the transistor invented?",
-            "How many years has a student been studying?",
+            getStringFromRecourse(R.string.appleQuest),
+            getStringFromRecourse(R.string.orangeQuest),
+            getStringFromRecourse(R.string.avocadoQuest),
+            getStringFromRecourse(R.string.cherryQuest),
+            getStringFromRecourse(R.string.pearQuest),
+            getStringFromRecourse(R.string.bananaQuest),
+            getStringFromRecourse(R.string.dogQuest),
+            getStringFromRecourse(R.string.catQuest),
+            getStringFromRecourse(R.string.fishQuest),
+            getStringFromRecourse(R.string.cowQuest),
+            getStringFromRecourse(R.string.pigQuest),
+            getStringFromRecourse(R.string.bumblebeeQuest),
+            getStringFromRecourse(R.string.chefQuest),
+            getStringFromRecourse(R.string.nannyQuest),
+            getStringFromRecourse(R.string.nurseQuest),
+            getStringFromRecourse(R.string.policeQuest),
+            getStringFromRecourse(R.string.serviceQuest),
+            getStringFromRecourse(R.string.studentQuest),
     };
 
     private int numOfQuestions = mQuestions.length;
 
+    private String getStringFromRecourse(int resId){
+        return App.getContext().getResources().getString(resId);
+    }
+
     private String mChoices[][] = {
-            {"The USA","China","New Zealand"},
-            {"Vitamin A","Vitamin C","Vitamin B"},
-            {"Farsi","Greek","Spanish"},
-            {"Water","Sugar","Protein"},
-            {"A veggie","A fruit","A flower"},
-            {"Green","Brown","Yellow"},
-            {"Wolves","Lions","Coyotes"},
-            {"Yes","No","Maybe"},
-            {"2000 metres","4000 metres","3000 metres"},
-            {"8 gallons","3 gallons","About a bathtub full"},
-            {"Piglets","Wild boar","Babirusa"},
-            {"Winter","Spring","Autumn"},
-            {"Naples","Venice","Rome"},
-            {"clean","driver","Save people"},
-            {"They help you learn numbers","They help exercise the brain","They are a time pass"},
-            {"101","100","102"},
-            {"1946","1974","1947"},
-            {"1","2","3"},
+            {getStringFromRecourse(R.string.appleA),getStringFromRecourse(R.string.appleB),getStringFromRecourse(R.string.appleC)},
+            {getStringFromRecourse(R.string.orangeA),getStringFromRecourse(R.string.orangeB),getStringFromRecourse(R.string.orangeC)},
+            {getStringFromRecourse(R.string.avocadoA),getStringFromRecourse(R.string.avocadoB),getStringFromRecourse(R.string.avocadoC)},
+            {getStringFromRecourse(R.string.cherryA),getStringFromRecourse(R.string.cherryB),getStringFromRecourse(R.string.cherryC)},
+            {getStringFromRecourse(R.string.pearA),getStringFromRecourse(R.string.pearB),getStringFromRecourse(R.string.pearC)},
+            {getStringFromRecourse(R.string.bananaA),getStringFromRecourse(R.string.bananaB),getStringFromRecourse(R.string.bananaC)},
+            {getStringFromRecourse(R.string.dogA),getStringFromRecourse(R.string.dogB),getStringFromRecourse(R.string.dogC)},
+            {getStringFromRecourse(R.string.catA),getStringFromRecourse(R.string.catB),getStringFromRecourse(R.string.catC)},
+            {getStringFromRecourse(R.string.fishA),getStringFromRecourse(R.string.fishB),getStringFromRecourse(R.string.fishC)},
+            {getStringFromRecourse(R.string.cowA),getStringFromRecourse(R.string.cowB),getStringFromRecourse(R.string.cowC)},
+            {getStringFromRecourse(R.string.pigA),getStringFromRecourse(R.string.pigB),getStringFromRecourse(R.string.pigC)},
+            {getStringFromRecourse(R.string.bumblebeeA),getStringFromRecourse(R.string.bumblebeeB),getStringFromRecourse(R.string.bumblebeeC)},
+            {getStringFromRecourse(R.string.chefA),getStringFromRecourse(R.string.chefB),getStringFromRecourse(R.string.chefC)},
+            {getStringFromRecourse(R.string.nannyA),getStringFromRecourse(R.string.nannyB),getStringFromRecourse(R.string.nannyC)},
+            {getStringFromRecourse(R.string.nurseA),getStringFromRecourse(R.string.nurseB),getStringFromRecourse(R.string.nurseC)},
+            {getStringFromRecourse(R.string.policeA),getStringFromRecourse(R.string.policeB),getStringFromRecourse(R.string.policeC)},
+            {getStringFromRecourse(R.string.serviceA),getStringFromRecourse(R.string.serviceB),getStringFromRecourse(R.string.serviceC)},
+            {getStringFromRecourse(R.string.studentA),getStringFromRecourse(R.string.studentB),getStringFromRecourse(R.string.studentC)},
     };
 
-    private final String[] mCorrectAnswers = {"China","Vitamin C","Spanish","Water","A fruit","Green","Wolves","No","2000 metres","About a bathtub full","Piglets","Autumn","Naples","clean","They help exercise the brain","100","1947","3"};
+    private final String[] mCorrectAnswers = {getStringFromRecourse(R.string.appleC),getStringFromRecourse(R.string.orangeC),getStringFromRecourse(R.string.avocadoA),getStringFromRecourse(R.string.cherryB),getStringFromRecourse(R.string.pearB),getStringFromRecourse(R.string.bananaA),getStringFromRecourse(R.string.dogA),getStringFromRecourse(R.string.catB),getStringFromRecourse(R.string.fishA),getStringFromRecourse(R.string.cowC),getStringFromRecourse(R.string.pigA),getStringFromRecourse(R.string.bumblebeeC),getStringFromRecourse(R.string.chefA),getStringFromRecourse(R.string.nannyA),getStringFromRecourse(R.string.nurseA),getStringFromRecourse(R.string.policeA),getStringFromRecourse(R.string.serviceA),getStringFromRecourse(R.string.studentA)};
 
     public int getNumOfQuestions(){
         return numOfQuestions;
@@ -75,6 +84,7 @@ public class QuestionLibrary {
         String answer = mCorrectAnswers[a];
         return  answer;
     }
+
 
 
 }

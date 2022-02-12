@@ -47,6 +47,7 @@ public class matching_game extends AppCompatActivity {
     int counter = 0;
     int delayMills = 0;
     boolean isMute;
+    Intent switchActivityIntent;
 
 
     //put the score update from Questions layot
@@ -58,6 +59,12 @@ public class matching_game extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     mScore = data.getIntExtra("scoreGame",0);
                     score.setText(Integer.toString(mScore));
+                }
+                break;
+            }
+            case(0):{
+                if (resultCode == Activity.RESULT_OK) {
+                    startActivityForResult(switchActivityIntent,3);
                 }
                 break;
             }
@@ -93,6 +100,7 @@ public class matching_game extends AppCompatActivity {
         sound = MediaPlayer.create(getApplicationContext(), R.raw.duck);
         sound.start();
         sound.setLooping(true);
+        final String[] nameOfCard = new String[1];
 
         // create TextToSpeech for answers
 
@@ -133,7 +141,7 @@ public class matching_game extends AppCompatActivity {
         // check level and put list of Images and delayMills
 
         if (level.equals("easy")){
-            delayMills = 1000;
+            delayMills = 750;
             list.add(R.drawable.apple);
             list.add(R.drawable.orange);
             list.add(R.drawable.avokado);
@@ -161,7 +169,7 @@ public class matching_game extends AppCompatActivity {
             list.add(R.drawable.cat);
             list.add(R.drawable.fish);
         }else{
-            delayMills = 500;
+            delayMills = 750;
             list.add(R.drawable.police);
             list.add(R.drawable.nurse);
             list.add(R.drawable.service);
@@ -175,8 +183,6 @@ public class matching_game extends AppCompatActivity {
             list.add(R.drawable.student);
             list.add(R.drawable.nanny);
         }
-
-
 
         Collections.shuffle(list);
         button1 = findViewById(R.id.btn1);
@@ -223,15 +229,21 @@ public class matching_game extends AppCompatActivity {
                             counter+=2;
                             mScore+=10;
                             score.setText(Integer.toString(mScore));
-                            String toSpeak = (String) buttons[finalI].getText();
-                            toSpeak = toSpeak.substring(13,toSpeak.length()-4);
-                            mTTs.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                            nameOfCard[0] = (String) buttons[finalI].getText();
+                            nameOfCard[0] = nameOfCard[0].substring(13, nameOfCard[0].length()-4);
+                            mTTs.speak(nameOfCard[0], TextToSpeech.QUEUE_FLUSH, null);
                             getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                             new android.os.Handler(Looper.getMainLooper()).postDelayed(
                                     new Runnable() {
                                         public void run() {
-                                            Intent switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
+                                            Intent intent = new Intent(matching_game.this,showCard.class);
+                                            intent.putExtra("imageCard", list.get(finalI));
+                                            intent.putExtra("nameCard", nameOfCard[0]);
+                                            startActivityForResult(intent,0);
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                                            switchActivityIntent = new Intent(matching_game.this,MainActivity.class);
                                             switchActivityIntent.putExtra("NAME_OF_IMAGE", buttons[finalI].getText());
                                             switchActivityIntent.putExtra("score", mScore);
                                             switchActivityIntent.putExtra("userName", userName.getText().toString());
@@ -240,7 +252,7 @@ public class matching_game extends AppCompatActivity {
                                                 switchActivityIntent.putExtra("win", true);
 
                                             }
-                                            startActivityForResult(switchActivityIntent,3);
+//                                            startActivityForResult(switchActivityIntent,3);
                                             buttons[finalI].setVisibility(View.INVISIBLE);
                                             buttons[lastClicked[0]].setVisibility(View.INVISIBLE);
                                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

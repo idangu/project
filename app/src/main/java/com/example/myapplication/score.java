@@ -28,7 +28,7 @@ public class score extends AppCompatActivity  {
         for (int i = 1; i <= size; i++) {
             mUsers.add(new UserInfo(mUserInfo.getString("userName_" + i, "Unknown"),mUserInfo.getInt("userScore_" + i, 0)));
         }
-
+        Collections.sort(mUsers);
         ArrayAdapter<UserInfo> itemsAdapter =
                 new ArrayAdapter<UserInfo>(this, android.R.layout.simple_list_item_1, mUsers);
 

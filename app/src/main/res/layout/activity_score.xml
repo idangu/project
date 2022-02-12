@@ -8,9 +8,10 @@
     tools:context=".score">
 
     <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/secular_one"
-        android:id="@+id/listView"/>
+        android:dividerHeight="5dp"
+        android:fontFamily="@font/secular_one" />
 
 </android.support.constraint.ConstraintLayout>

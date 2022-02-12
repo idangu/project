@@ -54,7 +54,7 @@
      android:background="@drawable/rectangle"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
-     android:text="@string/easyLevel"
+     android:text="@string/fruitsTitle"
      android:textColor="@color/white"
      android:textSize="30sp" />
 
@@ -68,7 +68,7 @@
      android:layout_height="wrap_content"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
-     android:text="@string/mediumLevel"
+     android:text="@string/animalsTitle"
      android:textColor="@color/white"
      android:textSize="30sp" />
 
@@ -82,7 +82,7 @@
      android:layout_height="wrap_content"
      android:backgroundTint="@color/design_default_color_primary"
      android:fontFamily="@font/secular_one"
-     android:text="@string/hardLevel"
+     android:text="@string/professionsTitle"
      android:textColor="@color/white"
      android:textSize="30sp" />
 

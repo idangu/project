@@ -161,8 +161,6 @@ public class MainScreenApp extends AppCompatActivity {
 
 
 
-
-
         showLevelsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,9 +182,14 @@ public class MainScreenApp extends AppCompatActivity {
         builder.setView(dialogView).setPositiveButton(register, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                switchActivityIntent.putExtra("userName", name.getText().toString());
-                startActivity(switchActivityIntent);
-                stopService(myService);                                                }
+                if(!name.getText().toString().isEmpty()){
+                    switchActivityIntent.putExtra("userName", name.getText().toString());
+                    startActivity(switchActivityIntent);
+                    stopService(myService);
+                }else{
+                    Toast.makeText(MainScreenApp.this, getResources().getString(R.string.emptyName), Toast.LENGTH_SHORT).show();
+                }
+            }
         }).show();
     }
 }
